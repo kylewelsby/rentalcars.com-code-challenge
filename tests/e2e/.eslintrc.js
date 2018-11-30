@@ -8,5 +8,12 @@ module.exports = {
   },
   rules: {
     strict: 'off'
+  },
+  globals: {
+    'Given': true,
+    'When': true,
+    'Then': true,
+    'And': true,
+    'cy': true
   }
 }

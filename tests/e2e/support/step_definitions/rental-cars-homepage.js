@@ -1,10 +1,31 @@
+function stubServer () {
+  cy.server({
+    delay: 50,
+    force404: true
+  })
+  cy.fixture('autocomplete.json').as('autocompleteJSON')
+  cy.route({
+    delay: 50,
+    method: 'GET',
+    url: 'https://www.rentalcars.com/FTSAutocomplete.do?*',
+    response: '@autocompleteJSON'
+  }).as('searchResult')
+  cy.route({
+    delay: 50,
+    method: 'GET',
+    url: 'https://www.rentalcars.com/FTSAutocomplete.do?*solrTerm====',
+    response: { 'results': { 'isGooglePowered': false, 'docs': [{ 'name': 'No results found' }], 'numFound': 0 } }
+  }).as('searchResultEmpty')
+}
 
 Given('I am a visitor to the rentalcars.com homepage', () => {
+  stubServer()
   cy
     .visit('/')
 })
 
 Given('I am a visitor on the Search Box within the rentalcars.com homepage', () => {
+  stubServer()
   cy
     .visit('/')
     .get('input[name="pick-up-location"]')
@@ -12,6 +33,7 @@ Given('I am a visitor on the Search Box within the rentalcars.com homepage', () 
 })
 
 Given('I am on the Search box within the rentalcars.com homepage', () => {
+  stubServer()
   cy
     .visit('/')
     .get('input[name="pick-up-location"]')
@@ -19,6 +41,7 @@ Given('I am on the Search box within the rentalcars.com homepage', () => {
 })
 
 Given(`the search results list is displayed`, () => {
+  stubServer()
   cy
     .visit('/')
     .get('input[name="pick-up-location"]')
@@ -47,31 +70,30 @@ When(`I enter 2 or more alphanumeric characters into the pick up location`, () =
   cy
     .get(`input[name="pick-up-location"]`)
     .type('man')
+  cy.wait('@searchResult')
 })
 
 When(`I have entered a matched search term for pick up location on desktop`, () => {
   cy
     .get(`input[name="pick-up-location"]`)
     .type('manchester')
+  cy.wait('@searchResult')
 })
 
-When(`I enter a search term in the pick up location that is not recognised eg XX`, () => {
+When(`I enter a search term in the pick up location that is not recognised`, () => {
   cy
     .get(`input[name="pick-up-location"]`)
-    .type('pluto')
+    .type('===')
+  cy.wait('@searchResultEmpty')
 })
 
 When(`I remove the search term leaving only 1 character`, () => {
   cy.get(`input[name="pick-up-location"]`).invoke('val').then(val => {
-    const keys = []
-    for (let i=1; i<val.length; i++) {
-      keys.push('{backspace}')
+    const selector = cy.get(`input[name="pick-up-location"]`)
+    for (let i = 1; i < val.length; i++) {
+      selector.type('{backspace}')
     }
-    cy
-      .get(`input[name="pick-up-location"]`)
-      .type(keys.join(''))
   })
-
 })
 
 Then('I should see a Search Widget', () => {

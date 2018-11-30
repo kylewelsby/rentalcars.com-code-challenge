@@ -20,7 +20,7 @@ Feature: Pick-up Location Auto Complete
 
   Scenario: error message when no results found
     Given I am a visitor on the Search Box within the rentalcars.com homepage
-    When I enter a search term in the pick up location that is not recognised eg XX
+    When I enter a search term in the pick up location that is not recognised
     Then I should see the message 'No results found'
 
   Scenario: not display results when input contains 1 character

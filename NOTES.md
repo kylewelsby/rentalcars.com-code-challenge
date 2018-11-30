@@ -10,3 +10,11 @@ I shall use E2E testing framework [Cypress.io](https://www.cypress.io/) with [Cu
 
 Step definitions for each will be defined in `./tests/e2e/support/step_definitions/rental-cars-homepage.js`.
 I'll get the MVP working as simply as possible and then continue to improve upon the application code.
+
+
+Now we have the e2e tests satisfied by using some very simple mocked logic.
+We now have to wire the application up with an API.
+
+We'll will use the simple but popular [`axios`](https://github.com/axios/axios) promised base HTTP client to make a request.
+
+For unit tests, we'll use the [`nock`](https://github.com/nock/nock) HTTP server mocking library, this is to safely mock the requests and not rely on a real HTTP request which can be un-predictable for our tests. 
