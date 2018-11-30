@@ -20,14 +20,11 @@
       class="searchResults"
       v-if="results.length"
     >
-      <div
-        class="searchResult__item"
+      <AutoCompleteSearchResult
         v-for="(result, index) in results"
         :key="index"
-      >
-        {{ result.name }} ({{ result.iata }})
-        <small>{{ result.city }} {{ result.country }}</small>
-      </div>
+        :data="result"
+      />
     </div>
     <div
       class="searchResults__error"
@@ -44,7 +41,11 @@
 </style>
 <script>
 import axios from 'axios'
+import AutoCompleteSearchResult from '@/components/AutoCompleteSearchResult'
 export default {
+  components: {
+    AutoCompleteSearchResult
+  },
   data () {
     return {
       query: '',
