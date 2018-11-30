@@ -1,0 +1,13 @@
+.btn {
+  padding: 1rem 2rem;
+  background-color: var(--color-gray);
+  color: var(--color-white);
+  border: 0;
+  border-radius: 0.1875rem;
+}
+
+.btn--search {
+  background-color: var(--color-green);
+  font-weight: 700;
+  font-size: 1.75rem;
+}

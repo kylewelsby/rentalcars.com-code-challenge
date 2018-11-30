@@ -36,6 +36,14 @@ We'll use the [BEM](http://getbem.com/) naming convention for naming our classes
 The `AutoCompleteSearchResult` component makes [flexbox](https://caniuse.com/#feat=flexbox) which is suported from IE 10+.
 
 We're also making use of [`rem`](https://www.w3.org/TR/css3-values/#font-relative-lengths) css units which are relative units to the computed `font-size` in the root element.
-Why use `rem` over `px`? Simply explained; it allows best support of browser text size. 
+Why use `rem` over `px`? Simply explained; it allows best support of browser text size.
 
 Simple `@supports` or modernizer.js checks could be put into place to patch support for older browsers, we'll add this graceful degratiation later.
+
+- commits `0e479de`
+
+Let's continue on with the styling.  We're going to format the `searchForm` to look like the site.
+
+// TODO: Search result loader
+// TODO: Make autocomplete overlay
+// TODO: Keyboard arrow support for location selection.

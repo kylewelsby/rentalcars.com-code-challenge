@@ -1,5 +1,7 @@
 :root {
   --color-white: #ffffff;
+  --color-black: #000000;
+  --color-text: #686868;
   --color-green: #00874d;
   --color-tag-red: #f2817f;
   --color-tag-green: #70d58e;
@@ -8,10 +10,20 @@
   --color-gray: #808080;
   --color-hr: #eaeaea;
   --color-yellow: #f3ce56;
+  --color-orange: #e59700;
+  --color-background-blue: #1878c2;
+
+  --font-default: "Open Sans", Helvetica, Arial, sans-serif;
+  --font-alt: Ubuntu, Helvetica, Arial, sans-serif;
+
+  --container-width: 1100px;
 
   font-size: 16px;
 }
 
+@custom-media --desktop (min-width: 1100px);
+
 body {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: var(--font-default);
+  color: var(--color-text);
 }

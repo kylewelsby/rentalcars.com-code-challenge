@@ -1,6 +1,13 @@
 .field__group {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.rc__label,
+label {
+  font-size: 0.875rem;
+  line-height: 1.875rem;
 }
 
 .rc__input,
@@ -8,5 +15,11 @@ input {
   border: 1px solid var(--color-gray);
   font-size: 0.8125rem;
   line-height: 0.875rem;
-  padding: 0.5625rem 0.75rem;
+  padding: 0.75rem;
+}
+
+.rc__input:focus,
+input:focus {
+  outline-color: var(--color-orange);
+  
 }
