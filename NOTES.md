@@ -47,3 +47,7 @@ Let's continue on with the styling.  We're going to format the `searchForm` to l
 // TODO: Search result loader
 // TODO: Make autocomplete overlay
 // TODO: Keyboard arrow support for location selection.
+
+- commit `f3a2748`
+
+We're going to do some simple CSS patching to make the search results appear on-top of the form.

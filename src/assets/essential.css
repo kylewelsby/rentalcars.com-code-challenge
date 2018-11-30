@@ -12,6 +12,8 @@
   --color-yellow: #f3ce56;
   --color-orange: #e59700;
   --color-background-blue: #1878c2;
+  --color-link: #0064c8;
+  --color-link--hover: #629ed5;
 
   --font-default: "Open Sans", Helvetica, Arial, sans-serif;
   --font-alt: Ubuntu, Helvetica, Arial, sans-serif;
@@ -26,4 +28,14 @@
 body {
   font-family: var(--font-default);
   color: var(--color-text);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+}
+
+a:hover {
+  color: var(--color-link--hover);
 }

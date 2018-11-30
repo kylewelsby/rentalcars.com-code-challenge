@@ -15,7 +15,10 @@
         {{ data.city }} {{ data.country }}
       </small>
     </div>
-    <div class="place__isPopular">
+    <div
+      class="place__isPopular"
+      v-if="data.isPopular"
+    >
       Popular
     </div>
   </div>

@@ -3,8 +3,16 @@
     <h1 class="heroTagline__title">
       Car Hire - Search, Compare &amp; Save
     </h1>
-    <svg class="heroTagline__subTitle" viewBox="0 0 525 20">
-      <text x="50%" y="50%" alignment-baseline="middle" text-anchor="middle">
+    <svg
+      class="heroTagline__subTitle"
+      viewBox="0 0 525 20"
+    >
+      <text
+        x="50%"
+        y="50%"
+        alignment-baseline="middle"
+        text-anchor="middle"
+      >
         Compare 900 companies at over 53,000 locations. Best price guaranteed
       </text>
     </svg>

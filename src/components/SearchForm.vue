@@ -6,7 +6,7 @@
     <h2 class="searchForm__title">
       Let's find your ideal car
     </h2>
-    <div class="field__group">
+    <div class="field__group field__group--locationSearch">
       <label for="pick-up-location">
         Pick-up Location
       </label>
@@ -15,9 +15,17 @@
         @keyup="performSearch"
         id="pick-up-location"
         name="pick-up-location"
+        class="searchForm__locationInput"
         placeholder="city, airport, station, region and district..."
       >
-      <div v-if="results.length">
+      <Spinner
+        class="searchForm__locationSpinner"
+        v-if="isBusy"
+      />
+      <div
+        v-if="results.length"
+        class="searchResults"
+      >
         <AutoCompleteSearchResult
           v-for="(result, index) in results"
           :key="index"
@@ -26,13 +34,18 @@
       </div>
       <div
         class="searchResults__error"
-        v-if="noResults"
+        v-if="noResults && !isBusy"
       >
         No results found
       </div>
     </div>
     <span class="searchForm__spacer" />
-    <button type="submit" class="btn btn--search">Search</button>
+    <button
+      type="submit"
+      class="btn btn--search"
+    >
+      Search
+    </button>
   </form>
 </template>
 <style>
@@ -55,6 +68,29 @@
   color: var(--color-black);
 }
 
+.field__group--locationSearch {
+  position: relative;
+}
+
+.searchResults {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid var(--color-gray);
+  border-top: 0;
+  border-bottom-left-radius: 0.1875rem;
+  border-bottom-right-radius: 0.1875rem;
+  overflow: hidden;
+}
+
+.searchForm__locationSpinner {
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+}
+
 .btn--search {
   align-self: flex-end;
   width: 100%;
@@ -63,9 +99,11 @@
 </style>
 <script>
 import axios from 'axios'
+import Spinner from '@/components/Spinner'
 import AutoCompleteSearchResult from '@/components/AutoCompleteSearchResult'
 export default {
   components: {
+    Spinner,
     AutoCompleteSearchResult
   },
   data () {
