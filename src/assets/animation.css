@@ -1,0 +1,21 @@
+.component-fade-reverse-enter-active, .component-fade-reverse-leave-active,
+.component-fade-enter-active, .component-fade-leave-active {
+  perspective: 1000;
+  transform-style: preserve-3d;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-duration: 0.25s;
+}
+.component-fade-enter {
+  transform: perspective(1000px) rotateX(-90deg);
+}
+.component-fade-leave-to {
+  transform: perspective(1000px) rotateX(90deg);
+}
+
+.component-fade-reverse-enter {
+  transform: perspective(1000px) rotateX(90deg);
+}
+.component-fade-reverse-leave-to {
+  transform: perspective(1000px) rotateX(-90deg);
+}

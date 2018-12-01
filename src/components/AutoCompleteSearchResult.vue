@@ -1,6 +1,7 @@
 <template lang="html">
   <div
     :class="`place place--${placeTypeName}`"
+    @click="$emit('choose', data)"
   >
     <span class="place__type">
       {{ placeTypeName | titleize }}

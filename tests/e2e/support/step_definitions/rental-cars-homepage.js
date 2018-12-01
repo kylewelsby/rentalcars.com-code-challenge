@@ -137,13 +137,13 @@ Then(`a focus state is applied`, () => {
 Then(`a text box labelled 'Pick-up Location'`, () => {
   cy
     .get('label[for="pick-up-location"]')
-    .should('have.text', 'Pick-up Location')
+    .should('contain', 'Pick-up Location')
 })
 
 Then(`the correct criteria is read out for the 'Pick-up Location' box`, () => {
   cy
     .get('label[for="pick-up-location"]')
-    .should('have.text', 'Pick-up Location')
+    .should('contain', 'Pick-up Location')
 })
 
 Then(`the placeholder text disappears`, () => {
@@ -176,7 +176,7 @@ Then(`the maximum number of search results displayed is 6`, () => {
 Then(`I should see the message 'No results found'`, () => {
   cy
     .get('.searchResults__error')
-    .should('have.text', 'No results found')
+    .should('contain', 'No results found')
 })
 
 Then(`the search results list no longer displayed`, () => {

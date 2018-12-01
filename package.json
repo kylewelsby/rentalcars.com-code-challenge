@@ -5,14 +5,17 @@
   "description": "RentalCars.com Code Challenge",
   "author": "Kyle Welsby <kyle@mekyle.com> (https://mekyle.com)",
   "scripts": {
+    "postinstall": "cypress install",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint",
     "test": "concurrently 'npm:test:e2e' 'npm:test:unit'",
     "test:e2e": "vue-cli-service test:e2e --headless",
     "test:e2e:watch": "vue-cli-service test:e2e --mode development",
     "test:unit": "vue-cli-service test:unit",
-    "test:unit:watch": "vue-cli-service test:unit --watchAll"
+    "test:unit:watch": "vue-cli-service test:unit --watchAll",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync --acl public-read --sse --delete ./dist/ s3://static-demo.mekyle.com/rentalcars.com --region eu-west-2"
   },
   "dependencies": {
     "axios": "^0.18.0",

@@ -41,7 +41,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 485px;
+  height: 400px;
   background-color: var(--color-background-blue);
 }
 .hero__container {
@@ -52,5 +52,11 @@ export default {
 .footnote {
   text-align: center;
   font-size: 0.8rem;
+}
+
+@media (min-width: 1100px) {
+  .hero::before {
+    height: 485px;
+  }
 }
 </style>

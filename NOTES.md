@@ -51,3 +51,9 @@ Let's continue on with the styling.  We're going to format the `searchForm` to l
 - commit `f3a2748`
 
 We're going to do some simple CSS patching to make the search results appear on-top of the form.
+
+- commit `78e83d0`
+
+Doing some final touches now, Logos, animations and functional niceity.
+
+- commit `f9c981b`

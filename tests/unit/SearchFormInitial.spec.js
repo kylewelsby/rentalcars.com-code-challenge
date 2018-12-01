@@ -2,7 +2,7 @@ import nock from 'nock'
 import path from 'path'
 import { shallowMount } from '@vue/test-utils'
 
-import App from '@/App.vue'
+import App from '@/components/SearchFormInitial.vue'
 
 describe('HelloWorld.vue', () => {
   beforeEach(() => {
@@ -18,7 +18,7 @@ describe('HelloWorld.vue', () => {
 
   it('renders props.msg when passed', () => {
     const wrapper = shallowMount(App)
-    expect(wrapper.text()).toMatch('RentalCars.com')
+    expect(wrapper.text()).toMatch(`Let's find your ideal car`)
   })
 
   describe('methods', () => {
