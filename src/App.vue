@@ -7,6 +7,16 @@
         <SearchForm />
       </div>
     </div>
+    <p class="footnote">
+      <a
+        href="https://github.com/kylewelsby/rentalcars.com-code-challenge"
+        rel="nofollow"
+      >
+        Code challenge
+      </a> completed by <a href="https://mekyle.com">
+        Kyle Welsby
+      </a>
+    </p>
   </div>
 </template>
 
@@ -37,5 +47,10 @@ export default {
 .hero__container {
   max-width: var(--container-width);
   margin: 0 auto;
+}
+
+.footnote {
+  text-align: center;
+  font-size: 0.8rem;
 }
 </style>
