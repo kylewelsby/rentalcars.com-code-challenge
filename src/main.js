@@ -5,6 +5,7 @@ import './assets/button.css'
 import './assets/animation.css'
 import Vue from 'vue'
 import './mixins/inflection'
+import './directives/click-outside'
 import App from './App.vue'
 
 Vue.config.productionTip = false

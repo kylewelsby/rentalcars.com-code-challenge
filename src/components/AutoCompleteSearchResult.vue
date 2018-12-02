@@ -1,6 +1,6 @@
 <template lang="html">
   <div
-    :class="`place place--${placeTypeName}`"
+    :class="classNames"
     @click="$emit('choose', data)"
   >
     <span class="place__type">
@@ -31,9 +31,21 @@ export default {
     data: {
       type: Object,
       required: true
+    },
+    isHighlighted: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
+    classNames () {
+      const classes = {
+        place: true,
+        'place--highlighted': this.isHighlighted
+      }
+      classes[`place--${this.placeTypeName}`] = true
+      return classes
+    },
     isAirport () {
       return this.data.placeType.toUpperCase() === 'A'
     },
@@ -69,6 +81,10 @@ export default {
   border-top: 0;
 }
 
+.place--highlighted {
+  font-weight: 700;
+}
+
 .place__isPopular,
 .place__type {
   color: var(--color-white);
@@ -78,7 +94,7 @@ export default {
   font-size: 0.85rem;
   text-align: center;
   margin: 0.625rem;
-  min-width: 3rem;
+  min-width: 4rem;
 }
 
 .place__type {
