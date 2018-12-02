@@ -1,5 +1,6 @@
 <template lang="html">
   <div
+    :class="{ 'AutoCompleteInput--hasError': hasError }"
     class="AutoCompleteInput field__group field__group--autocomplete"
     v-click-outside="close"
   >
@@ -37,12 +38,12 @@
         :is-highlighted="highlightedIndex === index"
         @choose="onChoose(result)"
       />
-      <div
-        class="AutoCompleteInput__error"
-        v-if="hasError"
-      >
-        {{ errorMessage }}
-      </div>
+    </div>
+    <div
+      class="AutoCompleteInput__error"
+      v-if="hasError"
+    >
+      {{ errorMessage }}
     </div>
   </div>
 </template>
@@ -98,7 +99,6 @@ export default {
   data () {
     return {
       hasHttpError: false,
-      errorMessage: '',
       isBusy: false,
       isOpen: false,
       results: [],
@@ -139,13 +139,23 @@ export default {
     * @name hasError
     */
     hasError () {
+      if (this.isBusy) return false
+      if (this.isNotMatchingQuery) return true
+      if (this.hasHttpError) return true
+      return false
+    },
+    /**
+     * @name errorMessage
+     * @return {string}
+     */
+    errorMessage () {
       if (this.isNotMatchingQuery) {
-        return true
+        return 'No results found'
       }
       if (this.hasHttpError) {
-        return true
+        return 'Sorry, an error happened while searching'
       }
-      return false
+      return ''
     }
   },
 
@@ -161,7 +171,9 @@ export default {
     },
     onChoose (data) {
       this.close()
-      this.value = data.name
+      if (data) {
+        this.value = data.name
+      }
       this.$emit('input', data)
     },
     onArrowUp () {
@@ -171,7 +183,9 @@ export default {
         this.highlightedIndex = 0
       }
       let result = this.results[this.highlightedIndex]
-      this.value = result.name
+      if (result) {
+        this.value = result.name
+      }
     },
     onArrowDown () {
       if (this.highlightedIndex !== null && this.highlightedIndex >= 0 && this.highlightedIndex < this.results.length - 1) {
@@ -180,12 +194,16 @@ export default {
         this.highlightedIndex = 0
       }
       let result = this.results[this.highlightedIndex]
-      this.value = result.name
+      if (result) {
+        this.value = result.name
+      }
     },
     onEnter () {
       this.close()
       let result = this.results[this.highlightedIndex]
-      this.value = result.name
+      if (result) {
+        this.value = result.name
+      }
       this.$emit('input', result)
     },
     close () {
@@ -218,6 +236,10 @@ export default {
   position: relative;
 }
 
+.AutoCompleteInput--hasError .AutoCompleteInput__input {
+  color: var(--color-red);
+}
+
 .AutoCompleteInput__results {
   position: absolute;
   z-index: 1;
@@ -238,6 +260,9 @@ export default {
 }
 
 .AutoCompleteInput__error {
-  color: var(--color-orange);
+  color: var(--color-red);
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
 }
 </style>

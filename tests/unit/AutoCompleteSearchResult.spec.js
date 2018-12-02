@@ -2,7 +2,8 @@ import nock from 'nock'
 import path from 'path'
 import { shallowMount } from '@vue/test-utils'
 
-import App from '@/components/SearchFormInitial.vue'
+import '@/directives/click-outside'
+import App from '@/components/AutoCompleteInput.vue'
 
 describe('HelloWorld.vue', () => {
   beforeEach(() => {
@@ -16,25 +17,28 @@ describe('HelloWorld.vue', () => {
       })
   })
 
-  it('renders props.msg when passed', () => {
-    const wrapper = shallowMount(App)
-    expect(wrapper.text()).toMatch(`Let's find your ideal car`)
-  })
-
   describe('methods', () => {
     describe('performSearch', () => {
       it('key up calls perform search with value', () => {
-        const wrapper = shallowMount(App)
+        const wrapper = shallowMount(App, {
+          propsData: {
+            label: 'Hello World'
+          }
+        })
         wrapper.vm.performSearch = jest.fn()
-        wrapper.vm.query = 'manchester'
-        wrapper.find('#pick-up-location').trigger('keyup')
+        wrapper.vm.value = 'manchester'
+        wrapper.find('.AutoCompleteInput__input').trigger('input')
         expect(wrapper.vm.performSearch).toHaveBeenCalled()
       })
 
       it('calls to an API and returns results matching the search term', async () => {
-        const wrapper = shallowMount(App)
+        const wrapper = shallowMount(App, {
+          propsData: {
+            label: 'Hello World'
+          }
+        })
         wrapper.vm.query = 'manchester'
-        await wrapper.vm.performSearch()
+        await wrapper.vm.performSearch('manchester')
         expect(wrapper.vm.results.length).toEqual(6)
       })
     })

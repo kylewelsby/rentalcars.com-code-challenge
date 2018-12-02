@@ -47,16 +47,16 @@ export default {
       return classes
     },
     isAirport () {
-      return this.data.placeType.toUpperCase() === 'A'
+      return this.data && this.data.placeType.toUpperCase() === 'A'
     },
     isStation () {
-      return this.data.placeType.toUpperCase() === 'T'
+      return this.data && this.data.placeType.toUpperCase() === 'T'
     },
     isDistrict () {
-      return this.data.placeType.toUpperCase() === 'D'
+      return this.data && this.data.placeType.toUpperCase() === 'D'
     },
     isCity () {
-      return this.data.placeType.toUpperCase() === 'C'
+      return this.data && this.data.placeType.toUpperCase() === 'C'
     },
     placeTypeName () {
       if (this.isAirport) return 'airport'

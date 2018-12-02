@@ -28,7 +28,7 @@ Given('I am a visitor on the Search Box within the rentalcars.com homepage', () 
   stubServer()
   cy
     .visit('/')
-    .get('input[name="pick-up-location"]')
+    .get(`input[name="AutoCompleteInput_1"]`)
     .focus()
 })
 
@@ -36,7 +36,7 @@ Given('I am on the Search box within the rentalcars.com homepage', () => {
   stubServer()
   cy
     .visit('/')
-    .get('input[name="pick-up-location"]')
+    .get(`input[name="AutoCompleteInput_1"]`)
     .focus()
 })
 
@@ -44,13 +44,13 @@ Given(`the search results list is displayed`, () => {
   stubServer()
   cy
     .visit('/')
-    .get('input[name="pick-up-location"]')
+    .get('input[name="AutoCompleteInput_1"]')
     .type('manchester')
 })
 
 When(`I click into 'Pick Up Location' box`, (label) => {
   cy
-    .get(`input[name="pick-up-location"]`)
+    .get(`input[name="AutoCompleteInput_1"]`)
     .click()
 })
 
@@ -62,34 +62,34 @@ When(`I use a screen reader`, () => {
 
 When(`I enter a single alphanumeric character into the pick up location`, () => {
   cy
-    .get(`input[name="pick-up-location"]`)
+    .get(`input[name="AutoCompleteInput_1"]`)
     .type('m')
 })
 
 When(`I enter 2 or more alphanumeric characters into the pick up location`, () => {
   cy
-    .get(`input[name="pick-up-location"]`)
+    .get(`input[name="AutoCompleteInput_1"]`)
     .type('man')
   cy.wait('@searchResult')
 })
 
 When(`I have entered a matched search term for pick up location on desktop`, () => {
   cy
-    .get(`input[name="pick-up-location"]`)
+    .get(`input[name="AutoCompleteInput_1"]`)
     .type('manchester')
   cy.wait('@searchResult')
 })
 
 When(`I enter a search term in the pick up location that is not recognised`, () => {
   cy
-    .get(`input[name="pick-up-location"]`)
+    .get(`input[name="AutoCompleteInput_1"]`)
     .type('===')
   cy.wait('@searchResultEmpty')
 })
 
 When(`I remove the search term leaving only 1 character`, () => {
-  cy.get(`input[name="pick-up-location"]`).invoke('val').then(val => {
-    const selector = cy.get(`input[name="pick-up-location"]`)
+  cy.get(`input[name="AutoCompleteInput_1"]`).invoke('val').then(val => {
+    const selector = cy.get(`input[name="AutoCompleteInput_1"]`)
     for (let i = 1; i < val.length; i++) {
       selector.type('{backspace}')
     }
@@ -98,7 +98,7 @@ When(`I remove the search term leaving only 1 character`, () => {
 
 Then('I should see a Search Widget', () => {
   cy
-    .get('input[name="pick-up-location"]')
+    .get(`input[name="AutoCompleteInput_1"]`)
     .should('exist')
 })
 
@@ -124,63 +124,63 @@ Then('the styling is as per the rentalcars.com homepage', () => {
 
 Then(`I should see the placeholder text within the {string} input box: {string}`, (label, placeholder) => {
   cy
-    .get('input[name="pick-up-location"]')
+    .get('input[name="AutoCompleteInput_1"]')
     .should('have.attr', 'placeholder', placeholder)
 })
 
 Then(`a focus state is applied`, () => {
   cy
     .focused()
-    .should('have.attr', 'name', 'pick-up-location')
+    .should('have.attr', 'name', 'AutoCompleteInput_1')
 })
 
 Then(`a text box labelled 'Pick-up Location'`, () => {
   cy
-    .get('label[for="pick-up-location"]')
+    .get('label[for="AutoCompleteInput_1"]')
     .should('contain', 'Pick-up Location')
 })
 
 Then(`the correct criteria is read out for the 'Pick-up Location' box`, () => {
   cy
-    .get('label[for="pick-up-location"]')
+    .get('label[for="AutoCompleteInput_1"]')
     .should('contain', 'Pick-up Location')
 })
 
 Then(`the placeholder text disappears`, () => {
   cy
-    .get('input[name="pick-up-location"]')
+    .get(`input[name="AutoCompleteInput_1"]`)
     .should('have.value', 'm')
 })
 
 Then(`no search results list is displayed`, () => {
   cy
-    .get('.searchResults')
+    .get('.AutoCompleteInput__results')
     .should('not.exist')
 })
 
 Then(`I see a list of search results`, () => {
   cy
-    .get('.searchResults')
+    .get('.AutoCompleteInput__results')
     .should('exist')
 })
 
 Then(`the maximum number of search results displayed is 6`, () => {
   cy
-    .get('.searchResults').within(() => {
+    .get('.AutoCompleteInput__results').within(() => {
       cy
-        .get('.searchResult__item')
+        .get('.place')
         .should('have.length.of.at.most', 6)
     })
 })
 
 Then(`I should see the message 'No results found'`, () => {
   cy
-    .get('.searchResults__error')
+    .get('.AutoCompleteInput__error')
     .should('contain', 'No results found')
 })
 
 Then(`the search results list no longer displayed`, () => {
   cy
-    .get('.searchResults')
+    .get('.AutoCompleteInput__results')
     .should('not.exist')
 })
